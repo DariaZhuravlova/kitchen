@@ -20,7 +20,7 @@ const CustomModal = ({isOpen, onClose, title, children, size = "xs"}: IProps) =>
         >
             <ModalContent>
                 <ModalHeader className="border-b">
-                    <h3 className="text-xl text-background font-semibold">{title}</h3>
+                    <h3 className="text-xl text-foreground font-semibold">{title}</h3>
                 </ModalHeader>
                 <ModalBody className="space-y-4 py-6">{children}</ModalBody>
             </ModalContent>
