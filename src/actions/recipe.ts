@@ -16,8 +16,8 @@ export async function getRecipes() {
 
         return {success: true, recipes};
     } catch (error) {
-        console.error("Error fetching recipes:", error);
-        return {success: false, error: "Ошибка при загрузке рецептов"};
+        console.error("Помилка при отриманні рецептів:", error);
+        return {success: false, error: "Помилка при завантаженні рецептів"};
     }
 }
 
@@ -37,7 +37,7 @@ export async function createRecipe(formData: FormData) {
         if (!name || ingredients.length === 0) {
             return {
                 success: false,
-                error: "Имя и хотя бы один ингредиент обязательны",
+                error: "Назва та хоча б один інгредієнт обов'язкові",
             };
         }
 
@@ -64,8 +64,8 @@ export async function createRecipe(formData: FormData) {
 
         return {success: true, recipe};
     } catch (error) {
-        console.error("Error creating recipe:", error);
-        return {success: false, error: "Ошибка при создании рецепта"};
+        console.error("Помилка створення рецепту:", error);
+        return {success: false, error: "Помилка при створенні рецепту"};
     }
 }
 
@@ -74,6 +74,7 @@ export async function updateRecipe(id: string, formData: FormData) {
         const name = formData.get("name") as string;
         const description = formData.get("description") as string;
         const imageUrl = formData.get("imageUrl") as string | null;
+
         const ingredients = Array.from(formData.entries())
             .filter(([key]) => key.startsWith("ingredient_"))
             .map(([key, value]) => ({
@@ -84,7 +85,7 @@ export async function updateRecipe(id: string, formData: FormData) {
         if (!name || ingredients.length === 0) {
             return {
                 success: false,
-                error: "Имя и хотя бы один ингредиент обязательны",
+                error: "Назва та хоча б один інгредієнт обов'язкові",
             };
         }
 
@@ -113,8 +114,8 @@ export async function updateRecipe(id: string, formData: FormData) {
 
         return {success: true, recipe};
     } catch (error) {
-        console.error("Error updating recipe:", error);
-        return {success: false, error: "Ошибка при обновлении рецепта"};
+        console.error("Помилка оновлення рецепту:", error);
+        return {success: false, error: "Помилка при оновленні рецепту"};
     }
 }
 
@@ -130,7 +131,7 @@ export async function deleteRecipe(id: string) {
 
         return {success: true};
     } catch (error) {
-        console.error("Error deleting recipe:", error);
-        return {success: false, error: "Ошибка при удалении рецепта"};
+        console.error("Помилка видалення рецепту:", error);
+        return {success: false, error: "Помилка при видаленні рецепту"};
     }
 }
