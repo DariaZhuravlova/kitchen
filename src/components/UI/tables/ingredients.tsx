@@ -35,6 +35,9 @@ const IngredientsTable = () => {
         return <p>Не авторизовано</p>;
     }
 
+    console.log("IngredientsTable - isLoading:", isLoading);
+    console.log("IngredientsTable - ingredients:", ingredients);
+
     return !isLoading && isAuth ? (
         <Table
             aria-label="Список інгредієнтів"
