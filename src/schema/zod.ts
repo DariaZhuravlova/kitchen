@@ -1,22 +1,23 @@
-import {object, string, number} from "zod";
-import {z} from "zod";
+import {object, string, z} from "zod";
 
 export const signInSchema = object({
-    email: string({required_error: "Email is required"})
-        .min(1, "Email is required")
-        .email("Invalid email"),
-    password: string({required_error: "Password is required"})
-        .min(1, "Password is required")
-        .min(6, "Password must be more than 8 characters")
-        .max(32, "Password must be less than 32 characters"),
+    email: string()
+        .min(1, {message: "Email обов'язковий"})
+        .email({message: "Невірний формат email"}),
+    password: string()
+        .min(6, {message: "Пароль повинен бути більше 6 символів"})
+        .max(32, {message: "Пароль повинен бути менше 32 символів"}),
 });
 
 export const ingredientSchema = object({
-    name: string().min(1, "Название обязательно"),
+    name: string().min(1, {message: "Назва обов'язкова"}),
     category: z.enum(["VEGETABLES", "FRUITS", "MEAT", "DAIRY", "SPICES", "OTHER"]),
     unit: z.enum(["GRAMS", "KILOGRAMS", "LITERS", "MILLILITERS", "PIECES"]),
-    pricePerUnit: number({invalid_type_error: "Цена должна быть числом"})
-        .min(0, "Цена должна быть положительной")
+    pricePerUnit: z
+        .number()
+        .refine((val) => val === null || val >= 0, {
+            message: "Ціна повинна бути додатньою",
+        })
         .nullable(),
-    description: z.string().optional(),
+    description: string().optional(),
 });
