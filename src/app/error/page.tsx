@@ -12,13 +12,13 @@ export default function Home() {
         <>
             <div className="flex w-full justify-center items-center mb-4">
                 <Link href="/recipes/new">
-                    <Button color="primary">Додати рецепт</Button>
+                    <Button color="primary">Добавить рецепт</Button>
                 </Link>
             </div>
 
             {error && <p className="text-red-500 mb-4">{error}</p>}
 
-            {isLoading && <p>Завантаження...</p>}
+            {isLoading && <p>Загрузка...</p>}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {recipes.map((recipe) => (
